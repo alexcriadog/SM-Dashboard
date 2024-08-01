@@ -1,3 +1,8 @@
 build:
   docker:
     web: Dockerfile
+  config:
+    APP_KEY: base64:KZ/h0P8nTz5MNiJvHmg9XpC4HcAmPr/Js/yHV0Wk9b8=
+    APP_ENV: production
+    APP_DEBUG: 'false'
+    APP_URL: http://sm-dashboard.herokuapp.com
