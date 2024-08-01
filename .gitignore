@@ -1,0 +1,15 @@
+/node_modules
+/vendor
+/.env
+/.idea
+/storage/*.key
+/public/hot
+/public/storage
+/public/js/*.js
+/public/css/*.css
+/public/mix-manifest.json
+/public/vite-manifest.json
+/public/build
+/.DS_Store
+/npm-debug.log
+yarn-error.log
