@@ -35,8 +35,12 @@ RUN composer clear-cache
 # Cambiar permisos de almacenamiento y caché para Laravel
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Exponer el puerto 80 para Apache
+# Script de inicio para configurar Apache con el puerto correcto
+COPY heroku-docker-start.sh /usr/local/bin/heroku-docker-start.sh
+RUN chmod +x /usr/local/bin/heroku-docker-start.sh
+
+# Exponer el puerto que será utilizado por Heroku
 EXPOSE 80
 
 # Comando por defecto para iniciar Apache en primer plano
-CMD ["apache2-foreground"]
+CMD ["heroku-docker-start.sh"]
