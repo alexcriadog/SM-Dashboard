@@ -1,6 +1,12 @@
 # Usa una imagen base de PHP con Apache
 FROM php:8.1-apache
 
+# Instalar herramientas necesarias
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
+    
 # Instalar extensiones de PHP necesarias
 RUN docker-php-ext-install pdo pdo_mysql
 
