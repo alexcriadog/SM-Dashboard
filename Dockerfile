@@ -1,5 +1,3 @@
-# Dockerfile
-
 # Usa una imagen base de PHP con Apache
 FROM php:8.1-apache
 
@@ -37,7 +35,7 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Configurar Apache
-RUN a2enmod rewrite
+RUN a2enmod rewrite mpm_prefork && a2dismod mpm_worker mpm_event
 
 # Exponer el puerto
 EXPOSE 80
