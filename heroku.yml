@@ -7,4 +7,4 @@ build:
     APP_DEBUG: 'false'
     APP_URL: http://sm-dashboard.herokuapp.com
 run:
-  web: bash /var/www/html/resources/heroku-docker-start.sh
+  web: bash /var/www/html/heroku-docker-start.sh
