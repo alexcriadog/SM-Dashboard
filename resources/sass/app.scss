@@ -1,0 +1,12 @@
+// Importa tus estilos SASS
+@import 'variables'; // Ejemplo de importación de un archivo de variables SASS
+// @import 'mixins';    // Ejemplo de importación de mixins SASS
+
+@tailwind base;      // Tailwind base styles
+@tailwind components;// Tailwind component styles
+@tailwind utilities; // Tailwind utility styles
+
+// Estilos personalizados
+body {
+    @apply bg-red-100; // Utiliza las utilidades de Tailwind para aplicar estilos
+}
