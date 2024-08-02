@@ -47,7 +47,7 @@ RUN composer clear-cache
 RUN npm install
 
 # Construir activos de frontend
-RUN npm run build
+RUN npm run prod
 
 # Cambiar permisos de almacenamiento y caché para Laravel
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
