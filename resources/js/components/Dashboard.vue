@@ -1,25 +1,25 @@
 <template>
-    <div class="p-4 bg-teal-600/20">
-        <div class="border-gray-200 rounded-lg dark:border-gray-700 mt-20">
+    <div class="p-4 bg-teal-600/10">
+        <div class="border-gray-200 rounded-lg mt-20">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
-                <div style="height: 390px" class="grid grid-cols-2 rounded">
+                <div style="height: 390px" class="grid grid-cols-2 rounded-lg drop-shadow-xl">
                     <indicator v-for="(card, index) in cards" :key="index" :title="card.title" :content="card.content"
                         :icon="card.icon" :color="card.color" />
                 </div>
-                <div style="height: 390px" class="flex items-center justify-center rounded bg-white">
+                <div style="height: 390px" class="flex items-center justify-center rounded-lg bg-white drop-shadow-xl">
                     <list-chart></list-chart>
                 </div>
-                <div style="height: 390px" class="flex items-center justify-center rounded bg-white">
+                <div style="height: 390px" class="flex items-center justify-center rounded-lg bg-white drop-shadow-xl">
                     <radial-chart></radial-chart>
                 </div>
             </div>
             <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-4">
                 <div style="height: 390px"
-                    class="flex items-center justify-center rounded bg-white">
+                    class="flex items-center justify-center rounded-lg bg-white drop-shadow-xl">
                     <sm-table></sm-table>
                 </div>
                 <div style="height: 390px"
-                    class="flex items-center justify-center rounded bg-white">
+                    class="flex items-center justify-center rounded-lg bg-white drop-shadow-xl">
                     <line-chart></line-chart>
                 </div>
             </div>

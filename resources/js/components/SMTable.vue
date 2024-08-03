@@ -1,13 +1,26 @@
 <template>
-    <div class="flex flex-col items-center justify-center rounded">
-        <p class="text-2xl font-bold">Table</p>
-        <DataTable :value="products" paginator :rows="3" class="w-100">
-            <Column field="name" header="Name" style="width: 25%"></Column>
-            <Column field="category" header="Country" style="width: 25%"></Column>
-            <Column field="price" header="Company" style="width: 25%"></Column>
-            <Column class="hidden sm:block" field="category" header="Representative" style="width: 25%"></Column>
-            <Column class="hidden sm:block" field="inventoryStatus" header="inventoryStatus" style="width: 25%"></Column>
-            <Column class="hidden sm:block" field="description" header="description" style="width: 25%"></Column>
+    <div class="flex flex-col items-center justify-between">
+        <p class="text-2xl font-bold self-start justify-self-start">Table</p>
+        <DataTable :value="products" paginator :rows="3" class="visible sm:hidden min-w-full flex-grow">
+            <Column field="name" header="Name"></Column>
+            <Column field="category" header="Country"></Column>
+            <Column field="price" header="Company"></Column>
+        </DataTable>
+        <DataTable :value="products" paginator :rows="5" class="hidden md:hidden xl:block min-w-full">
+            <Column field="name" header="Name"></Column>
+            <Column field="category" header="Country"></Column>
+            <Column field="price" header="Company"></Column>
+            <Column  field="category" header="Representative"></Column>
+            <Column  field="inventoryStatus" header="inventoryStatus"></Column>
+            <Column  field="description" header="description"></Column>
+        </DataTable>
+        <DataTable :value="products" paginator :rows="3" class="hidden md:block xl:hidden min-w-full">
+            <Column field="name" header="Name"></Column>
+            <Column field="category" header="Country"></Column>
+            <Column field="price" header="Company"></Column>
+            <Column  field="category" header="Representative"></Column>
+            <Column  field="inventoryStatus" header="inventoryStatus"></Column>
+            <Column  field="description" header="description"></Column>
         </DataTable>
     </div>
 </template>

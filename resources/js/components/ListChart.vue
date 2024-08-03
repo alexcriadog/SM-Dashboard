@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col items-center justify-center rounded">
+    <div class="flex flex-col items-center justify-center">
         <div class="min-w-full flex justify-between">
             <p class="text-2xl font-bold">Users this week</p>
             <div class="flex justify-center items-center">
