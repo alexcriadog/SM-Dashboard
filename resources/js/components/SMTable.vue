@@ -1,11 +1,13 @@
 <template>
     <div class="flex flex-col items-center justify-center rounded">
-        <DataTable :value="products" paginator :rows="5" :rowsPerPageOptions="[5, 10, 20, 50]"
-            tableStyle="min-width: 50rem">
+        <p class="text-2xl font-bold">Table</p>
+        <DataTable :value="products" paginator :rows="3" class="w-100">
             <Column field="name" header="Name" style="width: 25%"></Column>
             <Column field="category" header="Country" style="width: 25%"></Column>
             <Column field="price" header="Company" style="width: 25%"></Column>
-            <Column field="category" header="Representative" style="width: 25%"></Column>
+            <Column class="hidden sm:block" field="category" header="Representative" style="width: 25%"></Column>
+            <Column class="hidden sm:block" field="inventoryStatus" header="inventoryStatus" style="width: 25%"></Column>
+            <Column class="hidden sm:block" field="description" header="description" style="width: 25%"></Column>
         </DataTable>
     </div>
 </template>

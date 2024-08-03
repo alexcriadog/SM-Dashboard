@@ -14,7 +14,8 @@
                 </div>
             </div>
         </div>
-        <apexchart class="hidden sm:block" width="900" height="340" type="area" :options="options" :series="series"></apexchart>
+        <apexchart class="hidden md:hidden xl:block" width="900" height="340" type="area" :options="options" :series="series"></apexchart>
+        <apexchart class="hidden md:block xl:hidden" width="650" height="340" type="area" :options="options" :series="series"></apexchart>
         <apexchart class="visible sm:hidden" width="340" height="340" type="area" :options="options" :series="series"></apexchart>
     </div>
 </template>

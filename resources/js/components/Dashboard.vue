@@ -13,7 +13,7 @@
                     <radial-chart></radial-chart>
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-4 mb-4">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-4">
                 <div style="height: 390px"
                     class="flex items-center justify-center rounded bg-white">
                     <sm-table></sm-table>
