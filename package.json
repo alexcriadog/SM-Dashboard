@@ -1,31 +1,37 @@
 {
     "private": true,
     "scripts": {
-      "dev": "npm run development",
-      "development": "mix",
-      "watch": "mix watch",
-      "watch-poll": "mix watch -- --watch-options-poll=1000",
-      "hot": "mix watch --hot",
-      "prod": "npm run production",
-      "production": "mix --production"
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
     },
     "devDependencies": {
-      "autoprefixer": "^10.4.14",
-      "axios": "^1.4.0",
-      "laravel-mix": "^6.0.49",
-      "lodash": "^4.17.21",
-      "postcss": "^8.4.26",
-      "postcss-loader": "^6.2.1",
-      "resolve-url-loader": "^5.0.0",
-      "sass": "^1.58.0",
-      "sass-loader": "^13.2.2",
-      "tailwindcss": "^3.2.7",
-      "vue": "^3.2.49",
-      "vue-loader": "^17.2.2"
+        "autoprefixer": "^10.4.14",
+        "axios": "^1.4.0",
+        "laravel-mix": "^6.0.49",
+        "lodash": "^4.17.21",
+        "postcss": "^8.4.26",
+        "postcss-loader": "^6.2.1",
+        "resolve-url-loader": "^5.0.0",
+        "sass": "^1.58.0",
+        "sass-loader": "^13.2.2",
+        "tailwindcss": "^3.2.7",
+        "vue": "^3.2.49",
+        "vue-loader": "^17.2.2"
     },
     "dependencies": {
-      "vue-router": "^4.1.5",
-      "vuex": "^4.0.2"
+        "@fortawesome/fontawesome-svg-core": "^6.6.0",
+        "@fortawesome/free-solid-svg-icons": "^6.6.0",
+        "@fortawesome/vue-fontawesome": "^3.0.8",
+        "@primevue/themes": "^4.0.4",
+        "apexcharts": "^3.51.0",
+        "primevue": "^4.0.4",
+        "vue-router": "^4.1.5",
+        "vue3-apexcharts": "^1.5.3",
+        "vuex": "^4.0.2"
     }
-  }
-  
+}
