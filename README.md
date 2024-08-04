@@ -40,3 +40,9 @@ Pasos a seguir:
     - API (3.3)
         - Decidir que APIS consumimos.
     
+
+ENDPOINT API MOCKY: https://run.mocky.io/v3/ab2f4b97-ea28-495b-b67a-36bc9805e153
+EJEMPLOS DE LLAMADAS A NUESTRA API:
+curl -X GET "https://your-app.herokuapp.com/api/followers/date-range?start_date=2024-07-01&end_date=2024-07-31"
+curl -X GET "https://your-app.herokuapp.com/api/interactions/date-range?start_date=2024-07-01&end_date=2024-07-31"
+curl -X GET "https://your-app.herokuapp.com/api/follower-stats/date-range?start_date=2024-07-01&end_date=2024-07-31"
