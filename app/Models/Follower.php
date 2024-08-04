@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-
 class Follower extends Model
 {
     use HasFactory;
@@ -47,7 +46,7 @@ class Follower extends Model
     }
 
     /**
-     * Scope a query to only include followers created between specific dates.
+     * Scope a query to only include followers whose stats are between specific dates.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $startDate
@@ -60,6 +59,9 @@ class Follower extends Model
         $startDate = Carbon::createFromFormat('Y-m-d', $startDate)->startOfDay();
         $endDate = Carbon::createFromFormat('Y-m-d', $endDate)->endOfDay();
 
-        return $query->whereBetween('created_at', [$startDate, $endDate]);
+        // Join with followerStats and filter by date_followed
+        return $query->whereHas('followerStats', function (Builder $q) use ($startDate, $endDate) {
+            $q->whereBetween('date_followed', [$startDate, $endDate]);
+        });
     }
 }

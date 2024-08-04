@@ -1,8 +1,8 @@
 <template>
   <div class="h-screen w-screen flex flex-col">
     <!-- HEADER -->
-    <app-header></app-header>
-    <dashboard class="flex-grow w-full"></dashboard>
+    <app-header @periods="handlePeriods"></app-header>
+    <dashboard class="flex-grow w-full" :selectedPeriod="periods"></dashboard>
   </div>
 </template>
 
@@ -11,8 +11,15 @@ import Dashboard from './Dashboard.vue';
 
 export default {
   data() {
-
+    return {
+      periods: { name: 'Last week', code: '7' }
+    };
   },
+  methods: {
+    handlePeriods(periods) {
+      this.periods = periods;
+    }
+  }
 };
 </script>
 

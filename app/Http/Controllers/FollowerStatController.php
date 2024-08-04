@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follower;
+use App\Models\Interaction;
 use App\Models\FollowerStat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -143,6 +145,53 @@ class FollowerStatController extends Controller
 
             // Return the stats as a JSON response
             return response()->json($stats);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'An unexpected error occurred.',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function getCombinedData(Request $request)
+    {
+        try {
+            // Validate the date parameters
+            $request->validate([
+                'start_date' => 'required|date_format:Y-m-d',
+                'end_date' => 'required|date_format:Y-m-d',
+            ]);
+
+            $startDate = $request->input('start_date');
+            $endDate = $request->input('end_date');
+
+            // Total number of followers
+            $totalFollowers = FollowerStat::whereBetween('date_followed', [$startDate, $endDate])
+                ->distinct('follower_id')  // Ensure unique followers are counted
+                ->count('follower_id');
+
+            // Total number of interactions
+            $totalLikes = Interaction::whereBetween('timestamp', [$startDate, $endDate])->where('type', 'like')->count();
+
+            // Total number of interactions
+            $totalComments = Interaction::whereBetween('timestamp', [$startDate, $endDate])->where('type', 'comment')->count();
+            
+            // Calculate the interaction rate
+            $interactionQuery = Interaction::whereBetween('timestamp', [$startDate, $endDate]);
+            $totalInteractions = $interactionQuery->count();// Count the total number of followers
+
+            $interactionRate = $totalFollowers > 0 ? $totalInteractions / $totalFollowers : 0;
+
+            // Prepare the response data
+            $data = [
+                'total_followers' => $totalFollowers,
+                'total_likes' => $totalLikes,
+                'total_comments' => $totalComments,
+                'interaction_rate' => number_format($interactionRate, 2),
+            ];
+
+            return response()->json($data);
 
         } catch (\Exception $e) {
             return response()->json([

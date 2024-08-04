@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Interaction;
+use App\Models\Follower;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Carbon;
 
 class InteractionController extends Controller
 {
@@ -48,7 +50,6 @@ class InteractionController extends Controller
 
             // Return the interactions as a JSON response
             return response()->json($interactions);
-
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'An unexpected error occurred.',
@@ -101,7 +102,6 @@ class InteractionController extends Controller
 
             // Return the interactions as a JSON response
             return response()->json($interactions);
-
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'error' => 'Follower not found.',
@@ -172,8 +172,120 @@ class InteractionController extends Controller
 
             // Return the interactions as a JSON response
             return response()->json($interactions);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'An unexpected error occurred.',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Count the total number of interactions within a given date range.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function countInteractionsByDateRange(Request $request)
+    {
+        // Validar las fechas y el tipo
+        $validator = Validator::make($request->all(), [
+            'start_date' => 'required|date_format:Y-m-d',
+            'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
+            'type' => 'nullable|string|in:likes,comments,both',  // Validar tipo de interacción
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Errores de validación.',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            // Obtener las fechas de entrada
+            $startDate = Carbon::createFromFormat('Y-m-d', $request->input('start_date'))->startOfDay();
+            $endDate = Carbon::createFromFormat('Y-m-d', $request->input('end_date'))->endOfDay();
+            $type = $request->input('type', 'both'); // Obtener tipo de interacción, por defecto ambos
+
+            // Construir consulta según el tipo de interacción
+            $query = Interaction::whereBetween('created_at', [$startDate, $endDate]);
+
+            if ($type === 'likes') {
+                $query->where('type', 'like');
+            } elseif ($type === 'comments') {
+                $query->where('type', 'comment');
+            }
+
+            // Contar las interacciones
+            $interactionCount = $query->count();
+
+            // Retornar respuesta JSON
+            return response()->json([
+                'success' => true,
+                'start_date' => $startDate->toDateString(),
+                'end_date' => $endDate->toDateString(),
+                'type' => $type,
+                'data' => $interactionCount,
+            ]);
+        } catch (\Exception $e) {
+            // Manejar errores de excepción
+            return response()->json([
+                'success' => false,
+                'message' => 'Ocurrió un error inesperado.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+     /**
+     * Get the interaction rate per total followers within a date range.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getInteractionRateByDateRange(Request $request)
+    {
+        try {
+            // Validate the date parameters
+            $request->validate([
+                'start_date' => 'required|date_format:Y-m-d',
+                'end_date' => 'required|date_format:Y-m-d',
+                'type' => 'nullable|in:like,comment,both'
+            ]);
+
+            // Retrieve the date filters from the query parameters
+            $startDate = $request->input('start_date');
+            $endDate = $request->input('end_date');
+            $type = $request->input('type', 'both'); // Default to 'both' if not provided
+
+            // Initialize query for interactions
+            $interactionQuery = Interaction::whereBetween('timestamp', [$startDate, $endDate]);
+            
+            // Apply type filter if specified
+            if ($type !== 'both') {
+                $interactionQuery->where('type', $type);
+            }
+
+            // Count the total number of interactions
+            $totalInteractions = $interactionQuery->count();
+
+            // Count the total number of followers
+            $totalFollowers = Follower::whereHas('followerStats', function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('date_followed', [$startDate, $endDate]);
+            })->count();
+
+            // Calculate the interaction rate
+            $interactionRate = $totalFollowers > 0 ? $totalInteractions / $totalFollowers : 0;
+
+            // Return the interaction rate as a JSON response
+            return response()->json([
+                'interaction_rate' => $interactionRate
+            ], 200);
 
         } catch (\Exception $e) {
+            // Log and return unexpected errors
             return response()->json([
                 'error' => 'An unexpected error occurred.',
                 'details' => $e->getMessage()

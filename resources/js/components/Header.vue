@@ -4,11 +4,12 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center justify-start rtl:justify-end">
                     <img src="./../../images/camaleonics.jpg" class="h-12 me-3" alt="Camaleonic Analytics Logo" />
-                    <div class="flex flex-col">
-                        <span class="text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Welcome
+                    <div class="flex items-center">
+                        <span
+                            class="text-xl font-semibold hidden sm:block sm:mr-4 sm:text-2xl whitespace-nowrap dark:text-white">Welcome
                             to Dashboard!</span>
-                        <span class="text-md sm:text-sm whitespace-nowrap dark:text-white">Current
-                            Date</span>
+                        <Select v-model="selectedPeriod" @change="periodChanged" optionLabel="name" :options="periods"
+                            class="w-full md:w-56" />
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -27,9 +28,20 @@
 export default {
     data() {
         return {
-
+            selectedPeriod: { name: 'Last week', code: '7' },
+            periods: [
+                { name: 'Last week', code: '7' },
+                { name: 'Last two weeks', code: '14' },
+                { name: 'Last 30 days', code: '30' },
+                { name: 'Last 365 days', code: '365' }
+            ]
         };
     },
+    methods: {
+        periodChanged() {
+            this.$emit('periods', this.selectedPeriod);
+        }
+    }
 };
 </script>
 
