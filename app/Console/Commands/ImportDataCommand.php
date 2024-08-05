@@ -22,7 +22,7 @@ class ImportDataCommand extends Command
      */
     public function handle()
     {
-        $apiUrl = 'https://run.mocky.io/v3/ab2f4b97-ea28-495b-b67a-36bc9805e153'; // Replace with your actual API URL
+        $apiUrl = 'https://run.mocky.io/v3/851e3cf0-0905-45b9-bf93-1fadf79ae06c'; 
 
         try {
             // Fetch data from the external API

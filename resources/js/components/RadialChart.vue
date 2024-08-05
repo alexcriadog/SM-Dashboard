@@ -75,18 +75,8 @@ export default {
                     fontFamily: "Inter, sans-serif",
                 },
                 yaxis: {
-                    labels: {
-                        formatter: function (value) {
-                            return value + "k"
-                        },
-                    },
                 },
                 xaxis: {
-                    labels: {
-                        formatter: function (value) {
-                            return value + "k"
-                        },
-                    },
                     axisTicks: {
                         show: false,
                     },
@@ -104,7 +94,11 @@ export default {
     },
     methods: {
         async fetchData() {
-            axios.get("/api/followers/calculate/count-by-group?group_by=gender&start_date=" + this.startDate + "&end_date=" + this.endDate + "")
+            axios.get("/api/followers/calculate/count-by-group?group_by=gender&start_date=" + this.startDate + "&end_date=" + this.endDate + "",{
+                headers: {
+                    'Authorization': `Bearer ${process.env.API_SECRET_TOKEN}`
+                }
+            })
                 .then(response => {
                     this.options.labels = Object.keys(response.data.data);
                     this.series = Object.values(response.data.data);

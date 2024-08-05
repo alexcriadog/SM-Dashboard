@@ -1,12 +1,12 @@
 <template>
-    <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200">
         <div class="px-3 py-3 lg:px-5 lg:pl-3">
             <div class="flex items-center justify-between">
                 <div class="flex items-center justify-start rtl:justify-end">
                     <img src="./../../images/camaleonics.jpg" class="h-12 me-3" alt="Camaleonic Analytics Logo" />
                     <div class="flex items-center">
                         <span
-                            class="text-xl font-semibold hidden sm:block sm:mr-4 sm:text-2xl whitespace-nowrap dark:text-white">Welcome
+                            class="text-xl font-semibold hidden sm:block sm:mr-4 sm:text-2xl whitespace-nowrap">Welcome
                             to Dashboard!</span>
                         <Select v-model="selectedPeriod" @change="periodChanged" optionLabel="name" :options="periods"
                             class="w-full md:w-56" />

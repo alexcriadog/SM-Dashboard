@@ -78,10 +78,10 @@ export default {
                         show: true,
                         style: {
                             fontFamily: "Inter, sans-serif",
-                            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+                            cssClass: 'text-xs font-normal fill-gray-500'
                         }
                     },
-                    categories: [],
+                    // categories: [],
                     axisTicks: {
                         show: false,
                     },
@@ -94,7 +94,7 @@ export default {
                         show: true,
                         style: {
                             fontFamily: "Inter, sans-serif",
-                            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+                            cssClass: 'text-xs font-normal fill-gray-500'
                         }
                     }
                 },
@@ -120,10 +120,21 @@ export default {
     },
     methods: {
         async fetchData() {
-            axios.get("/api/followers/calculate/count-by-group?group_by=country&start_date=" + this.startDate + "&end_date=" + this.endDate + "")
+            axios.get("/api/followers/calculate/count-by-group?group_by=country&start_date=" + this.startDate + "&end_date=" + this.endDate + "",{
+                headers: {
+                    'Authorization': `Bearer ${process.env.API_SECRET_TOKEN}`
+                }
+            })
                 .then(response => {
-                    this.options.xaxis.categories = Object.keys(response.data.data);
-                    this.series[0].data = Object.values(response.data.data);
+                    const entries = Object.entries(response.data.data);
+                    entries.sort((a, b) => b[1] - a[1]);
+
+                    const topThreeCountries = entries.slice(0, 3);
+                    
+                    this.series[0].data = topThreeCountries.map((value) => ({
+                        x: value[0],
+                        y: value[1]
+                    }));
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);

@@ -12,7 +12,7 @@ class CreateFollowerStatsTable extends Migration
         Schema::create('follower_stats', function (Blueprint $table) {
             $table->id();
             $table->foreignId('follower_id')->constrained('followers')->onDelete('cascade');
-            $table->date('date_followed')->unique(); // Ensure the combination is unique
+            $table->date('date_followed'); // Ensure the combination is unique
             $table->integer('likes')->default(0);
             $table->integer('comments')->default(0);
             $table->integer('posts')->default(0);

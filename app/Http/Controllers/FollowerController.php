@@ -80,13 +80,6 @@ class FollowerController extends Controller
             ], 200);
 
         } catch (\Exception $e) {
-            // Return validation errors
-            return response()->json([
-                'error' => 'Validation error.',
-                'details' => $e->getMessage()
-            ], 422);
-
-        } catch (\Exception $e) {
             // Log and return unexpected errors
             Log::error('Error retrieving total followers: ' . $e->getMessage());
             return response()->json([
@@ -116,7 +109,7 @@ class FollowerController extends Controller
             $groupBy = $request->input('group_by');
             $startDate = $request->input('start_date');
             $endDate = $request->input('end_date');
-
+            
             // Initialize the query builder for Follower
             $query = Follower::query();
 

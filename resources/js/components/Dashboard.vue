@@ -15,10 +15,10 @@
             </div>
             <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mb-4">
                 <div style="height: 390px" class="flex items-center justify-center rounded-lg bg-white drop-shadow-xl">
-                    <sm-table></sm-table>
+                    <sm-table :startDate="startDate" :endDate="endDate"></sm-table>
                 </div>
                 <div style="height: 390px" class="flex items-center justify-center rounded-lg bg-white drop-shadow-xl">
-                    <line-chart></line-chart>
+                    <line-chart :startDate="startDate" :endDate="endDate"></line-chart>
                 </div>
             </div>
         </div>
@@ -125,7 +125,11 @@ export default {
             this.fetchData();
         },
         async fetchData() {
-            axios.get("/api/combined-data?start_date=" + this.startDate + "&end_date=" + this.endDate + "")
+            axios.get("/api/combined-data?start_date=" + this.startDate + "&end_date=" + this.endDate + "", {
+                headers: {
+                    'Authorization': `Bearer ${process.env.API_SECRET_TOKEN}`
+                }
+            })
                 .then(response => {
                     this.cards[0].content = response.data.total_comments;
                     this.cards[1].content = response.data.total_likes;
