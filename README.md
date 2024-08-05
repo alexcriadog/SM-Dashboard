@@ -1,74 +1,82 @@
-# Proyecto de Dashboard
+# Dashboard Project
 
-Este proyecto es un dashboard para la visualización de datos de seguidores e interacciones en una plataforma social. Utiliza Laravel para el backend y Vue.js para el frontend. A continuación, se detalla la configuración, las funcionalidades implementadas, las ideas pendientes y cómo ejecutar el proyecto en local.
+This project is a dashboard for visualizing followers and interaction data on a social platform. It uses Laravel for the backend and Vue.js for the frontend. Below are details on the setup, implemented features, pending ideas, and how to run the project locally.
 
-APP : **https://sm-dashboard-85573649b649.herokuapp.com/** 
+APP: **https://sm-dashboard-85573649b649.herokuapp.com/**
 
-## Funcionalidades Implementadas
+## Implemented Features
 
-1. **Endpoints de la API**:
-   - `/followers/show/date-range`: Obtiene los seguidores en un rango de fechas.
-   - `/followers/calculate/total-by-date-range`: Calcula el total de seguidores en un rango de fechas.
-   - `/followers/calculate/count-by-group`: Calcula el número de seguidores por grupo.
-   - `/interactions/show/date-range`: Obtiene las interacciones en un rango de fechas.
-   - `/interactions/calculate/count`: Calcula el número de interacciones en un rango de fechas.
-   - `/interactions/calculate/rate`: Obtiene la tasa de interacciones en un rango de fechas.
-   - `/follower-stats/show/date-range`: Obtiene las estadísticas de seguidores en un rango de fechas.
-   - `/combined-data`: Obtiene datos combinados de seguidores e interacciones.
+1. **API Endpoints**:
+   - `/followers/show/date-range`: Retrieves followers within a date range.
+   - `/followers/calculate/total-by-date-range`: Calculates the total number of followers within a date range.
+   - `/followers/calculate/count-by-group`: Calculates the number of followers by group.
+   - `/interactions/show/date-range`: Retrieves interactions within a date range.
+   - `/interactions/calculate/count`: Calculates the number of interactions within a date range.
+   - `/interactions/calculate/rate`: Retrieves the interaction rate within a date range.
+   - `/follower-stats/show/date-range`: Retrieves follower statistics within a date range.
+   - `/combined-data`: Retrieves combined data for followers and interactions.
 
-2. **Configuración de Base de Datos**:
-   - El proyecto utiliza una base de datos MySQL.
-   - La configuración de la base de datos en Heroku con ClearDB se ha integrado para la producción.
+2. **Database Configuration**:
+   - The project uses a MySQL database.
+   - The database configuration on Heroku with ClearDB has been integrated for production.
 
-3. **Deploy en Heroku**:
-   - Este proyecto esta en la pagina de Heroku, tanto la aplicación como la BBDD.
+3. **Deploy on Heroku**:
+   - This project is deployed on Heroku, including both the application and the database.
 
 4. **API**:
-   - Hemos recreado una API en Mocky: https://run.mocky.io/v3/851e3cf0-0905-45b9-bf93-1fadf79ae06c
-   - Mediante un comando he leido los datos y los he guardado en la BBDD. Utilizando Laravel Schedule.
+   - We have recreated an API on Mocky: [Mocky API](https://run.mocky.io/v3/851e3cf0-0905-45b9-bf93-1fadf79ae06c)
+   - Using a command, I have read the data and saved it in the database, utilizing Laravel Schedule.
 
-4. **Front**:
-   - He creado un Front-End responsive y con unos simples graficos.
-   - He utilizado Tailwind.
+5. **Front**:
+   - I have created a responsive frontend with simple charts.
+   - Tailwind was used for styling.
 
-## Ideas Pendientes
+## Pending Ideas
 
-1. **Testing con PHPUnit**:
-   - He comenzado con la implementación de los tests, pero debido a que no he tenido más tiempo, lo he tenido que dejar.
+1. **Testing with PHPUnit**:
+   - I started implementing tests, but due to time constraints, I had to leave it incomplete.
 
-2. **Autenticación y Autorización**:
-   - Implementar autenticación y autorización para proteger los endpoints de la API. He creado anteriormente tanto sistemas de protección con Tokens como sistemas de login (con SSO). Pero no he tenido tiempo de hacerlo.
+2. **Authentication and Authorization**:
+   - Implement authentication and authorization to protect the API endpoints. I have previously created token-based protection systems and login systems (with SSO) but did not have time to implement this.
 
-3. **Traducciones**:
-   - Me falta implementar un sistema de traducciones, en la empresa actual lo estoy implementando y se como se hace, pero no he podido realizarlo.
+3. **Translations**:
+   - A translation system is missing. I am implementing it in my current job and know how to do it, but I was unable to complete it.
 
 4. **Charts**:
-   - Me hubiese gustado tener tiempo para implementar un grafico dinamico y algunos graficos más complejos. Pero el tiempo que he tenido ha sido muy limitado debido a mi trabajo actual.
+   - I would have liked to have time to implement dynamic charts and some more complex charts, but my time was very limited due to my current work.
 
-## Ejecución en Local
+## Running Locally
 
-### Requisitos
+### Requirements
 
-- **PHP** (versión 8.0 o superior)
-- **Composer** (para la gestión de dependencias de PHP)
-- **MySQL** (o compatible)
-- **Node.js** (para la gestión de dependencias de frontend)
-- **NPM/Yarn** (para la gestión de paquetes de frontend)
+- **PHP** (version 8.0 or higher)
+- **Composer** (for managing PHP dependencies)
+- **MySQL** (or compatible)
+- **Node.js** (for managing frontend dependencies)
+- **NPM/Yarn** (for managing frontend packages)
 
-### Pasos para Ejecutar el Proyecto
+### Steps to Run the Project
 
-1. **Clonar el Repositorio**
-``` git clone https://github.com/alexcriadog/SM-Dashboard.git ``` 
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/alexcriadog/SM-Dashboard.
+   ```
 
 2. **Dockers**
-``` docker-compose up -d app ``` 
+   ```bash  
+   docker-compose up -d app 
+   ``` 
 
 3. **NPM and COMPOSER install**
-``` composer install ``` 
-``` npm install ``` 
+   ```bash  
+   composer install 
+   npm install 
+   ``` 
 
 4. **NPM RUN**
-``` npm run dev ``` 
+   ```bash
+   npm run dev 
+   ``` 
 
-4. **Abre la aplicacion**
-La aplicacion estará en 'localhost:8080'
+5. **The application will be available at localhost:8080**
+
